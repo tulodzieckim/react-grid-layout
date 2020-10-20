@@ -583,6 +583,7 @@ export default class ReactGridLayout extends React.Component<Props, State> {
     // we should ignore events from layout's children in Firefox
     // to avoid unpredictable jumping of a dropping placeholder
     // FIXME remove this hack
+    console.log("onDragOver", { event: e, isFirefox });
     if (
       isFirefox &&
       e.nativeEvent.target.className.indexOf(layoutClassName) === -1
