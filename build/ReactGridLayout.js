@@ -221,6 +221,7 @@ var ReactGridLayout = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "onDrop", function (e
     /*: Event*/
     ) {
+      console.log("react-grid-layout onDrop");
       var droppingItem = _this.props.droppingItem;
       var layout = _this.state.layout;
       var item = layout.find(function (l) {
