@@ -678,10 +678,14 @@ var ReactGridLayout = /*#__PURE__*/function (_React$Component) {
         ref: innerRef,
         className: mergedClassName,
         style: mergedStyle,
-        onDrop: isDroppable ? this.onDrop : _utils.noop,
-        onDragLeave: isDroppable ? this.onDragLeave : _utils.noop,
-        onDragEnter: isDroppable ? this.onDragEnter : _utils.noop,
-        onDragOver: isDroppable ? this.onDragOver : _utils.noop
+        onDrop: this.onDrop,
+        onDragLeave: this.onDragLeave,
+        onDragEnter: this.onDragEnter,
+        onDragOver: this.onDragOver //   onDrop={isDroppable ? this.onDrop : noop}
+        //   onDragLeave={isDroppable ? this.onDragLeave : noop}
+        //   onDragEnter={isDroppable ? this.onDragEnter : noop}
+        //   onDragOver={isDroppable ? this.onDragOver : noop}
+
       }, _react.default.Children.map(this.props.children, function (child) {
         return _this2.processGridItem(child);
       }), isDroppable && this.state.droppingDOMNode && this.processGridItem(this.state.droppingDOMNode, true), this.placeholder());
