@@ -27,18 +27,6 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -124,71 +112,65 @@ var ReactGridLayout = /*#__PURE__*/function (_React$Component) {
         return false;
       }
 
-      var _this$props = _this.props,
-          droppingItem = _this$props.droppingItem,
-          margin = _this$props.margin,
-          cols = _this$props.cols,
-          rowHeight = _this$props.rowHeight,
-          maxRows = _this$props.maxRows,
-          width = _this$props.width,
-          containerPadding = _this$props.containerPadding;
-      var layout = _this.state.layout; // This is relative to the DOM element that this event fired for.
-
-      var _e$nativeEvent = e.nativeEvent,
-          layerX = _e$nativeEvent.layerX,
-          layerY = _e$nativeEvent.layerY;
-      var droppingPosition = {
-        left: layerX,
-        top: layerY,
-        e: e
-      };
-
-      if (!_this.state.droppingDOMNode) {
-        var positionParams
-        /*: PositionParams*/
-        = {
-          cols: cols,
-          margin: margin,
-          maxRows: maxRows,
-          rowHeight: rowHeight,
-          containerWidth: width,
-          containerPadding: containerPadding || margin
-        };
-        var calculatedPosition = (0, _calculateUtils.calcXY)(positionParams, layerY, layerX, droppingItem.w, droppingItem.h);
-
-        _this.setState({
-          droppingDOMNode: /*#__PURE__*/_react.default.createElement("div", {
-            key: droppingItem.i
-          }),
-          droppingPosition: droppingPosition,
-          layout: [].concat(_toConsumableArray(layout), [_objectSpread(_objectSpread({}, droppingItem), {}, {
-            x: calculatedPosition.x,
-            y: calculatedPosition.y,
-            static: false,
-            isDraggable: true
-          })])
-        });
-      } else if (_this.state.droppingPosition) {
-        var _this$state$droppingP = _this.state.droppingPosition,
-            left = _this$state$droppingP.left,
-            top = _this$state$droppingP.top;
-        var shouldUpdatePosition = left != layerX || top != layerY;
-
-        if (shouldUpdatePosition) {
-          _this.setState({
-            droppingPosition: droppingPosition
-          });
-        }
-      }
-
-      e.stopPropagation();
       e.preventDefault();
+      e.stopPropagation(); //  const {
+      //    droppingItem,
+      //    margin,
+      //    cols,
+      //    rowHeight,
+      //    maxRows,
+      //    width,
+      //    containerPadding
+      //  } = this.props;
+      //  const { layout } = this.state;
+      //  // This is relative to the DOM element that this event fired for.
+      //  const { layerX, layerY } = e.nativeEvent;
+      //  const droppingPosition = { left: layerX, top: layerY, e };
+      //  if (!this.state.droppingDOMNode) {
+      //    const positionParams: PositionParams = {
+      //      cols,
+      //      margin,
+      //      maxRows,
+      //      rowHeight,
+      //      containerWidth: width,
+      //      containerPadding: containerPadding || margin
+      //    };
+      //    const calculatedPosition = calcXY(
+      //      positionParams,
+      //      layerY,
+      //      layerX,
+      //      droppingItem.w,
+      //      droppingItem.h
+      //    );
+      //    this.setState({
+      //      droppingDOMNode: <div key={droppingItem.i} />,
+      //      droppingPosition,
+      //      layout: [
+      //        ...layout,
+      //        {
+      //          ...droppingItem,
+      //          x: calculatedPosition.x,
+      //          y: calculatedPosition.y,
+      //          static: false,
+      //          isDraggable: true
+      //        }
+      //      ]
+      //    });
+      //  } else if (this.state.droppingPosition) {
+      //    const { left, top } = this.state.droppingPosition;
+      //    const shouldUpdatePosition = left != layerX || top != layerY;
+      //    if (shouldUpdatePosition) {
+      //      this.setState({ droppingPosition });
+      //    }
+      //  }
+      //  e.stopPropagation();
+      //  e.preventDefault();
     });
 
     _defineProperty(_assertThisInitialized(_this), "removeDroppingPlaceholder", function () {
-      var _this$props2 = _this.props,
-          droppingItem = _this$props2.droppingItem,
-          cols = _this$props2.cols;
+      var _this$props = _this.props,
+          droppingItem = _this$props.droppingItem,
+          cols = _this$props.cols;
       var layout = _this.state.layout;
       var newLayout = (0, _utils.compact)(layout.filter(function (l) {
         return l.i !== droppingItem.i;
@@ -214,8 +196,9 @@ var ReactGridLayout = /*#__PURE__*/function (_React$Component) {
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "onDragEnter", function () {
+    _defineProperty(_assertThisInitialized(_this), "onDragEnter", function (e) {
       _this.dragEnterCounter++;
+      e.preventDefault();
     });
 
     _defineProperty(_assertThisInitialized(_this), "onDrop", function (e
@@ -383,9 +366,9 @@ var ReactGridLayout = /*#__PURE__*/function (_React$Component) {
       if (!this.state.activeDrag) return;
       var oldDragItem = this.state.oldDragItem;
       var layout = this.state.layout;
-      var _this$props3 = this.props,
-          cols = _this$props3.cols,
-          preventCollision = _this$props3.preventCollision;
+      var _this$props2 = this.props,
+          cols = _this$props2.cols,
+          preventCollision = _this$props2.preventCollision;
       var l = (0, _utils.getLayoutItem)(layout, i);
       if (!l) return; // Move the element here
 
@@ -450,9 +433,9 @@ var ReactGridLayout = /*#__PURE__*/function (_React$Component) {
       var _this$state = this.state,
           layout = _this$state.layout,
           oldResizeItem = _this$state.oldResizeItem;
-      var _this$props4 = this.props,
-          cols = _this$props4.cols,
-          preventCollision = _this$props4.preventCollision;
+      var _this$props3 = this.props,
+          cols = _this$props3.cols,
+          preventCollision = _this$props3.preventCollision;
       var l
       /*: ?LayoutItem*/
       = (0, _utils.getLayoutItem)(layout, i);
@@ -545,15 +528,15 @@ var ReactGridLayout = /*#__PURE__*/function (_React$Component) {
     {
       var activeDrag = this.state.activeDrag;
       if (!activeDrag) return null;
-      var _this$props5 = this.props,
-          width = _this$props5.width,
-          cols = _this$props5.cols,
-          margin = _this$props5.margin,
-          containerPadding = _this$props5.containerPadding,
-          rowHeight = _this$props5.rowHeight,
-          maxRows = _this$props5.maxRows,
-          useCSSTransforms = _this$props5.useCSSTransforms,
-          transformScale = _this$props5.transformScale; // {...this.state.activeDrag} is pretty slow, actually
+      var _this$props4 = this.props,
+          width = _this$props4.width,
+          cols = _this$props4.cols,
+          margin = _this$props4.margin,
+          containerPadding = _this$props4.containerPadding,
+          rowHeight = _this$props4.rowHeight,
+          maxRows = _this$props4.maxRows,
+          useCSSTransforms = _this$props4.useCSSTransforms,
+          transformScale = _this$props4.transformScale; // {...this.state.activeDrag} is pretty slow, actually
 
       return /*#__PURE__*/_react.default.createElement(_GridItem.default, {
         w: activeDrag.w,
@@ -593,22 +576,22 @@ var ReactGridLayout = /*#__PURE__*/function (_React$Component) {
       if (!child || !child.key) return;
       var l = (0, _utils.getLayoutItem)(this.state.layout, String(child.key));
       if (!l) return null;
-      var _this$props6 = this.props,
-          width = _this$props6.width,
-          cols = _this$props6.cols,
-          margin = _this$props6.margin,
-          containerPadding = _this$props6.containerPadding,
-          rowHeight = _this$props6.rowHeight,
-          maxRows = _this$props6.maxRows,
-          isDraggable = _this$props6.isDraggable,
-          isResizable = _this$props6.isResizable,
-          isBounded = _this$props6.isBounded,
-          useCSSTransforms = _this$props6.useCSSTransforms,
-          transformScale = _this$props6.transformScale,
-          draggableCancel = _this$props6.draggableCancel,
-          draggableHandle = _this$props6.draggableHandle,
-          resizeHandles = _this$props6.resizeHandles,
-          resizeHandle = _this$props6.resizeHandle;
+      var _this$props5 = this.props,
+          width = _this$props5.width,
+          cols = _this$props5.cols,
+          margin = _this$props5.margin,
+          containerPadding = _this$props5.containerPadding,
+          rowHeight = _this$props5.rowHeight,
+          maxRows = _this$props5.maxRows,
+          isDraggable = _this$props5.isDraggable,
+          isResizable = _this$props5.isResizable,
+          isBounded = _this$props5.isBounded,
+          useCSSTransforms = _this$props5.useCSSTransforms,
+          transformScale = _this$props5.transformScale,
+          draggableCancel = _this$props5.draggableCancel,
+          draggableHandle = _this$props5.draggableHandle,
+          resizeHandles = _this$props5.resizeHandles,
+          resizeHandle = _this$props5.resizeHandle;
       var _this$state3 = this.state,
           mounted = _this$state3.mounted,
           droppingPosition = _this$state3.droppingPosition; // Determine user manipulations possible.
@@ -663,11 +646,11 @@ var ReactGridLayout = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var _this$props7 = this.props,
-          className = _this$props7.className,
-          style = _this$props7.style,
-          isDroppable = _this$props7.isDroppable,
-          innerRef = _this$props7.innerRef;
+      var _this$props6 = this.props,
+          className = _this$props6.className,
+          style = _this$props6.style,
+          isDroppable = _this$props6.isDroppable,
+          innerRef = _this$props6.innerRef;
       var mergedClassName = (0, _classnames.default)(layoutClassName, className);
 
       var mergedStyle = _objectSpread({

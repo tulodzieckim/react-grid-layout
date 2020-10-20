@@ -591,62 +591,65 @@ export default class ReactGridLayout extends React.Component<Props, State> {
       return false;
     }
 
-    const {
-      droppingItem,
-      margin,
-      cols,
-      rowHeight,
-      maxRows,
-      width,
-      containerPadding
-    } = this.props;
-    const { layout } = this.state;
-    // This is relative to the DOM element that this event fired for.
-    const { layerX, layerY } = e.nativeEvent;
-    const droppingPosition = { left: layerX, top: layerY, e };
-
-    if (!this.state.droppingDOMNode) {
-      const positionParams: PositionParams = {
-        cols,
-        margin,
-        maxRows,
-        rowHeight,
-        containerWidth: width,
-        containerPadding: containerPadding || margin
-      };
-
-      const calculatedPosition = calcXY(
-        positionParams,
-        layerY,
-        layerX,
-        droppingItem.w,
-        droppingItem.h
-      );
-
-      this.setState({
-        droppingDOMNode: <div key={droppingItem.i} />,
-        droppingPosition,
-        layout: [
-          ...layout,
-          {
-            ...droppingItem,
-            x: calculatedPosition.x,
-            y: calculatedPosition.y,
-            static: false,
-            isDraggable: true
-          }
-        ]
-      });
-    } else if (this.state.droppingPosition) {
-      const { left, top } = this.state.droppingPosition;
-      const shouldUpdatePosition = left != layerX || top != layerY;
-      if (shouldUpdatePosition) {
-        this.setState({ droppingPosition });
-      }
-    }
-
-    e.stopPropagation();
     e.preventDefault();
+    e.stopPropagation();
+
+    //  const {
+    //    droppingItem,
+    //    margin,
+    //    cols,
+    //    rowHeight,
+    //    maxRows,
+    //    width,
+    //    containerPadding
+    //  } = this.props;
+    //  const { layout } = this.state;
+    //  // This is relative to the DOM element that this event fired for.
+    //  const { layerX, layerY } = e.nativeEvent;
+    //  const droppingPosition = { left: layerX, top: layerY, e };
+
+    //  if (!this.state.droppingDOMNode) {
+    //    const positionParams: PositionParams = {
+    //      cols,
+    //      margin,
+    //      maxRows,
+    //      rowHeight,
+    //      containerWidth: width,
+    //      containerPadding: containerPadding || margin
+    //    };
+
+    //    const calculatedPosition = calcXY(
+    //      positionParams,
+    //      layerY,
+    //      layerX,
+    //      droppingItem.w,
+    //      droppingItem.h
+    //    );
+
+    //    this.setState({
+    //      droppingDOMNode: <div key={droppingItem.i} />,
+    //      droppingPosition,
+    //      layout: [
+    //        ...layout,
+    //        {
+    //          ...droppingItem,
+    //          x: calculatedPosition.x,
+    //          y: calculatedPosition.y,
+    //          static: false,
+    //          isDraggable: true
+    //        }
+    //      ]
+    //    });
+    //  } else if (this.state.droppingPosition) {
+    //    const { left, top } = this.state.droppingPosition;
+    //    const shouldUpdatePosition = left != layerX || top != layerY;
+    //    if (shouldUpdatePosition) {
+    //      this.setState({ droppingPosition });
+    //    }
+    //  }
+
+    //  e.stopPropagation();
+    //  e.preventDefault();
   };
 
   removeDroppingPlaceholder = () => {
@@ -680,8 +683,9 @@ export default class ReactGridLayout extends React.Component<Props, State> {
     }
   };
 
-  onDragEnter = () => {
+  onDragEnter = e => {
     this.dragEnterCounter++;
+    e.preventDefault();
   };
 
   onDrop = (e: Event) => {
