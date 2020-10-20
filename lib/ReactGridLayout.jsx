@@ -685,6 +685,7 @@ export default class ReactGridLayout extends React.Component<Props, State> {
   };
 
   onDrop = (e: Event) => {
+    console.log("react-grid-layout onDrop");
     const { droppingItem } = this.props;
     const { layout } = this.state;
     const item = layout.find(l => l.i === droppingItem.i);
